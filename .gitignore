@@ -1,3 +1,7 @@
+#Composer Files
+composer.phar
+composer.lock
+
 #Build Output
 build/
 vendor/
