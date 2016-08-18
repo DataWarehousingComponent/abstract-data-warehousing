@@ -42,8 +42,9 @@
             "@cpd",
             "@test"
         ],
-	"cs": "phpcs --ignore=/vendor,/build,ModuleOptions.php  module",
-        "cs-fix": "phpcbf --ignore=/vendor,/build ",
+        "cpd": "phpcpd --exclude=vendor --fuzzy src",
+        "cs": "phpcs --ignore=/vendor,/build src",
+        "cs-fix": "phpcbf --ignore=/vendor,/build src",
         "test": "phpunit --verbose"
     }
 }
