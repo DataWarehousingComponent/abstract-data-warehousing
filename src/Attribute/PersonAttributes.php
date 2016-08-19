@@ -24,38 +24,36 @@
  * THE SOFTWARE.
  */
 
-namespace CodingMatters\Persistence;
+namespace CodingMatters\Persistence\Attribute;
 
-use CodingMatters\Persistence\Mapper;
-use CodingMatters\Persistence\Factory;
-
-final class ConfigProvider
+trait PersonAttributes
 {
+    private $student_id;
+    private $first_name;
+    private $middle_name;
+    private $last_name;
+
     /**
-     * Used mainly for Zend Expressive Configuration
-     *
-     * @return Array
+     * @return string $first_name
      */
-    public function __invoke()
+    public function getFirstName()
     {
-        return [
-            'dependencies' => $this->getServiceConfig()
-        ];
+        return $this->first_name;
     }
 
     /**
-     * Return dependencies mapping for this module.
-     *
-     * @return array
+     * @return string $middle_name
      */
-    public function getServiceConfig()
+    public function getMiddleName()
     {
-        return [
-            'invokables'    => [],
-            'factories'     => [
-                Mapper\DatabaseMapperInterface::class => Factory\Mapper\ZendDbMapperFactory::class
-            ],
-            'delegators'    => []
-        ];
+        return $this->middle_name;
+    }
+
+    /**
+     * @return string $last_name
+     */
+    public function getLastName()
+    {
+        return $this->last_name;
     }
 }

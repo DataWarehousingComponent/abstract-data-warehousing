@@ -24,38 +24,29 @@
  * THE SOFTWARE.
  */
 
-namespace CodingMatters\Persistence;
+namespace CodingMatters\Persistence\Factory\Mapper;
 
-use CodingMatters\Persistence\Mapper;
-use CodingMatters\Persistence\Factory;
+use CodingMatters\Persistence\Mapper\ZendDbMapper;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
+use InvalidArgumentException;
+use Zend\Db\Sql\Sql;
 
-final class ConfigProvider
+final class ZendDbMapperFactory implements FactoryInterface
 {
     /**
-     * Used mainly for Zend Expressive Configuration
-     *
-     * @return Array
+     * {@inheritDoc}
      */
-    public function __invoke()
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return [
-            'dependencies' => $this->getServiceConfig()
-        ];
-    }
+        // disabled unused variables;
+        unset($options, $requestedName);
+        
+        if (!$container->has('naawan_db')) {
+            throw new InvalidArgumentException('Missing: Database Adapter', 404);
+        }
 
-    /**
-     * Return dependencies mapping for this module.
-     *
-     * @return array
-     */
-    public function getServiceConfig()
-    {
-        return [
-            'invokables'    => [],
-            'factories'     => [
-                Mapper\DatabaseMapperInterface::class => Factory\Mapper\ZendDbMapperFactory::class
-            ],
-            'delegators'    => []
-        ];
+        $sql = new Sql($container->get('users_db'));        
+        return new ZendDbMapper($sql);
     }
 }

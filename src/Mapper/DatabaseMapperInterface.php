@@ -24,38 +24,45 @@
  * THE SOFTWARE.
  */
 
-namespace CodingMatters\Persistence;
+namespace CodingMatters\Persistence\Mapper;
 
-use CodingMatters\Persistence\Mapper;
-use CodingMatters\Persistence\Factory;
+use Zend\Db\Sql\Insert;
+use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Update;
+use Zend\Db\Sql\Delete;
 
-final class ConfigProvider
+interface DatabaseMapperInterface
 {
     /**
-     * Used mainly for Zend Expressive Configuration
      *
-     * @return Array
+     *
+     * @param Select $sqlObject
+     * @param AbstractResultSet $result
+     * @return Zend\Db\Adapter\Driver\Pdo\Result
      */
-    public function __invoke()
-    {
-        return [
-            'dependencies' => $this->getServiceConfig()
-        ];
-    }
+    public function select(Select $sqlObject);
 
     /**
-     * Return dependencies mapping for this module.
      *
-     * @return array
+     *
+     * @param Insert $query
+     * @return Zend\Db\Adapter\Driver\Pdo\Result
      */
-    public function getServiceConfig()
-    {
-        return [
-            'invokables'    => [],
-            'factories'     => [
-                Mapper\DatabaseMapperInterface::class => Factory\Mapper\ZendDbMapperFactory::class
-            ],
-            'delegators'    => []
-        ];
-    }
+    public function insert(Insert $sqlObject);
+
+    /**
+     *
+     *
+     * @param Update $sqlObject
+     * @return Zend\Db\Adapter\Driver\Pdo\Result
+     */
+    public function update(Update $sqlObject);
+
+    /**
+     *
+     *
+     * @param Delete $sqlObject
+     * @return Zend\Db\Adapter\Driver\Pdo\Result
+     */
+    public function delete(Delete $sqlObject);
 }

@@ -24,38 +24,22 @@
  * THE SOFTWARE.
  */
 
-namespace CodingMatters\Persistence;
+namespace CodingMatters\Persistence\Entity;
 
-use CodingMatters\Persistence\Mapper;
-use CodingMatters\Persistence\Factory;
-
-final class ConfigProvider
+interface PersonInterface extends EntityPrototype
 {
     /**
-     * Used mainly for Zend Expressive Configuration
-     *
-     * @return Array
+     * @return string $first_name
      */
-    public function __invoke()
-    {
-        return [
-            'dependencies' => $this->getServiceConfig()
-        ];
-    }
+    public function getFirstName();
 
     /**
-     * Return dependencies mapping for this module.
-     *
-     * @return array
+     * @return string $middle_name
      */
-    public function getServiceConfig()
-    {
-        return [
-            'invokables'    => [],
-            'factories'     => [
-                Mapper\DatabaseMapperInterface::class => Factory\Mapper\ZendDbMapperFactory::class
-            ],
-            'delegators'    => []
-        ];
-    }
+    public function getMiddleName();
+
+    /**
+     * @return string $last_name
+     */
+    public function getLastName();
 }

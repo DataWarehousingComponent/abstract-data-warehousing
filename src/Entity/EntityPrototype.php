@@ -24,38 +24,21 @@
  * THE SOFTWARE.
  */
 
-namespace CodingMatters\Persistence;
+namespace CodingMatters\Persistence\Entity;
 
-use CodingMatters\Persistence\Mapper;
-use CodingMatters\Persistence\Factory;
-
-final class ConfigProvider
+interface EntityPrototype
 {
     /**
-     * Used mainly for Zend Expressive Configuration
+     * Get Primary Key ID
      *
-     * @return Array
+     * @return string
      */
-    public function __invoke()
-    {
-        return [
-            'dependencies' => $this->getServiceConfig()
-        ];
-    }
+    public function getId();
 
     /**
-     * Return dependencies mapping for this module.
+     * Convert to Array
      *
      * @return array
      */
-    public function getServiceConfig()
-    {
-        return [
-            'invokables'    => [],
-            'factories'     => [
-                Mapper\DatabaseMapperInterface::class => Factory\Mapper\ZendDbMapperFactory::class
-            ],
-            'delegators'    => []
-        ];
-    }
+    public function toArray();
 }

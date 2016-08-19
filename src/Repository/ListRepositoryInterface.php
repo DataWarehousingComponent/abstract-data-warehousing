@@ -24,38 +24,24 @@
  * THE SOFTWARE.
  */
 
-namespace CodingMatters\Persistence;
+namespace CodingMatters\Persistence\Repository;
 
-use CodingMatters\Persistence\Mapper;
-use CodingMatters\Persistence\Factory;
-
-final class ConfigProvider
+interface ListRepositoryInterface
 {
     /**
-     * Used mainly for Zend Expressive Configuration
+     * Return a set of all entity that we can iterate over.
      *
-     * @return Array
+     * Each entry should be a Post instance.
+     *
+     * @return EntityPrototype[]
      */
-    public function __invoke()
-    {
-        return [
-            'dependencies' => $this->getServiceConfig()
-        ];
-    }
+    public function fetchAll();
 
     /**
-     * Return dependencies mapping for this module.
+     * Return a single entity prototype.
      *
-     * @return array
+     * @param integer $id Identifier of the entity to return.
+     * @return EntityPrototype
      */
-    public function getServiceConfig()
-    {
-        return [
-            'invokables'    => [],
-            'factories'     => [
-                Mapper\DatabaseMapperInterface::class => Factory\Mapper\ZendDbMapperFactory::class
-            ],
-            'delegators'    => []
-        ];
-    }
+    public function fetchById($id);
 }
