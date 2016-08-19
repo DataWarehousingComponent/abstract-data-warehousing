@@ -41,12 +41,12 @@ final class ZendDbMapperFactory implements FactoryInterface
     {
         // disabled unused variables;
         unset($options, $requestedName);
-        
-        if (!$container->has('naawan_db')) {
+
+        if (!$container->has('zend_db_adapter')) {
             throw new InvalidArgumentException('Missing: Database Adapter', 404);
         }
 
-        $sql = new Sql($container->get('users_db'));        
+        $sql = new Sql($container->get('zend_db_adapter'));
         return new ZendDbMapper($sql);
     }
 }
