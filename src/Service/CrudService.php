@@ -56,7 +56,7 @@ final class CrudService
      * @var string
      */
     protected $primary_key = '';
-    
+
     public function __construct(DatabaseMapperInterface $mapper, HydratingResultSet $resultSet)
     {
         $this->resultSet    = $resultSet;
@@ -64,22 +64,22 @@ final class CrudService
     }
 
     /**
-     * 
+     *
      * @param integer $id
      * @return type
      * @throws InvalidArgumentException
      */
     public function select($id = null)
     {
-        if (!isset($this->table)) {
+        if (null == $this->table) {
             throw new InvalidArgumentException('Table schema not set.');
         }
 
         $sqlObject = new Select($this->table);
 
         // Will prepare the query to SELECT * FROM TABLE WHERE $primary_key = $id
-        if (!is_null($id)) {
-            if (!isset($this->primary_key)) {
+        if (null == $id) {
+            if (null == $this->primary_key) {
                 throw new InvalidArgumentException('Primary key not set.');
             }
 
@@ -92,14 +92,14 @@ final class CrudService
     }
 
     /**
-     * 
+     *
      * @param EntityPrototype $entity
      * @return type
      * @throws InvalidArgumentException
      */
     public function insert(EntityPrototype $entity)
     {
-        if (!isset($this->table)) {
+        if (null == $this->table) {
             throw new InvalidArgumentException('Table schema not set.');
         }
 
@@ -110,22 +110,22 @@ final class CrudService
     }
 
     /**
-     * 
+     *
      * @param EntityPrototype $entity
      * @return type
      * @throws InvalidArgumentException
      */
     public function update(EntityPrototype $entity)
     {
-        if (!isset($this->table)) {
+        if (null == $this->table) {
             throw new InvalidArgumentException('Table schema not set.');
         }
 
-        if (!isset($this->primary_key)) {
+        if (null == $this->primary_key) {
             throw new InvalidArgumentException('Primary key not set.');
         }
 
-        if (!isset($entity->getId())) {
+        if (null == $entity->getId()) {
             throw new InvalidArgumentException('Row ID is not set correctly');
         }
 
@@ -137,26 +137,26 @@ final class CrudService
     }
 
     /**
-     * 
+     *
      * @param EntityPrototype $entity
      * @return type
      * @throws InvalidArgumentException
      */
     public function delete(EntityPrototype $entity)
     {
-        if (!isset($this->table)) {
+        if (null == $this->table) {
             throw new InvalidArgumentException('Table schema not set.');
         }
 
-        if (!isset($this->primary_key)) {
+        if (null == $this->primary_key) {
             throw new InvalidArgumentException('Primary key not set.');
         }
 
-        if (!isset($entity->getId())) {
+        if (null == $entity->getId()) {
             throw new InvalidArgumentException('Row ID is not set correctly');
         }
 
-        $sqlObject = new Delete($this->table);        
+        $sqlObject = new Delete($this->table);
         $sqlObject->where(["{$this->primary_key} = ?" => $entity->getId()]);
 
         return $this->mapper->delete($sqlObject);
