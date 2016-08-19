@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "CodingMatters\\Persistence\\": "module/Persistence/src/"
+            "CodingMatters\\Persistence\\": "src/"
         }
     },
     "extra": {
@@ -34,7 +34,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "CodingMatters\\PersistenceTest\\": "module/Persistence/test/"
+            "CodingMatters\\PersistenceTest\\": "test/"
         }
     },
     "scripts": {
