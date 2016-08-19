@@ -35,7 +35,7 @@ use Zend\Db\Sql\Insert;
 use Zend\Db\Sql\Update;
 use Zend\Db\Sql\Delete;
 
-final class CrudService
+abstract class CrudService
 {
     /**
      * @var DatabaseMapperInterface
@@ -78,7 +78,7 @@ final class CrudService
         $sqlObject = new Select($this->table);
 
         // Will prepare the query to SELECT * FROM TABLE WHERE $primary_key = $id
-        if (null == $id) {
+        if (null !== $id) {
             if (null == $this->primary_key) {
                 throw new InvalidArgumentException('Primary key not set.');
             }
