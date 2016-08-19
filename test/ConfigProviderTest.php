@@ -39,14 +39,14 @@ final class ConfigProviderTest extends TestCase
     public function setUp()
     {
         $this->provider = new ConfigProvider();
-    }    
+    }
 
     /**
      * @dataProvider getModuleConfigKeys
      * @param array $key
      */
     public function testCpnfigProviderConfigKeyMustExist($key)
-    {        
+    {
         $this->assertArrayHasKey($key, $this->provider->__invoke());
         $this->assertTrue(is_array($this->provider->__invoke()[$key]));
     }
