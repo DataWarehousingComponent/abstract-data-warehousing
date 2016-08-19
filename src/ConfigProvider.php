@@ -51,10 +51,10 @@ final class ConfigProvider
     public function getServiceConfig()
     {
         return [
-            'invokables'    => [],
             'factories'     => [
                 Mapper\DatabaseMapperInterface::class => Factory\Mapper\ZendDbMapperFactory::class
             ],
+            'invokables'    => [],
             'delegators'    => []
         ];
     }
