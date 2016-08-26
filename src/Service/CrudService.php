@@ -161,4 +161,9 @@ abstract class CrudService
 
         return $this->mapper->delete($sqlObject);
     }
+
+    public function getResultSet()
+    {
+	return $this->resultSet;
+    }
 }
